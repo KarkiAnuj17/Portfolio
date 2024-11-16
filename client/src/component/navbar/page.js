@@ -4,39 +4,38 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@n
 const CustomNavbar = () => {
   return (
     <div>
-      <Navbar className="flex w-full items-center justify-between p-6 text-white bg-gradient-to-r from-cyan-700 to-teal-500">
+      <Navbar className="flex w-full items-center justify-between p-5 text-white bg-gradient-to-r from-cyan-700 to-teal-500">
         <NavbarBrand className="w-auto">
           <p className="font-bold text-4xl text-gray-100">ANUJ.</p>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex w-full justify-center text-xl gap-8">
           <NavbarItem>
-            <Link color="foreground" href="#" className="text-gray-200 hover:text-white">
+            <Link color="foreground" href="#">
               Home
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href="#" aria-current="page" className="text-gray-200 hover:text-white">
-              About me
+            <Link href="#" aria-current="page" >
+            Resume
+              
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#" className="text-gray-200 hover:text-white">
-              Resume
+            <Link color="foreground" href="#about">
+            About me
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#" className="text-gray-200 hover:text-white">
+            <Link color="foreground" href="#project" >
               Project
             </Link>
           </NavbarItem>
         </NavbarContent>
         <NavbarContent className="w-1/3 text-xl gap-6">
           <NavbarItem>
-            <Button className="border border-solid border-blue-900 text-white p-2 rounded-3xl">
-              <Link href="#" className="text-white no-underline">
-                Connect with me
-              </Link>
-            </Button>
+          <Button href="#" className="text-white bg-gradient-to-r from-purple-700 to-orange-700 p-3 rounded-3xl shadow-lg hover:from-purple-600 hover:to-orange-600">
+              Connect with me
+          </Button>
           </NavbarItem>
         </NavbarContent>
       </Navbar>
