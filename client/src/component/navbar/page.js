@@ -1,46 +1,38 @@
-import React from 'react'
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import React from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link } from "@nextui-org/react";
 
 const CustomNavbar = () => {
   return (
-    <div>
-      <Navbar className="flex w-full items-center justify-between p-5 text-white bg-gradient-to-r from-cyan-700 to-teal-500">
-        <NavbarBrand className="w-auto">
+    <Navbar className="flex w-full items-center justify-center p-5 ">
+      <div className="flex w-full max-w-5xl items-center justify-between">
+        <NavbarBrand>
           <p className="font-bold text-4xl text-gray-100">ANUJ.</p>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex w-full justify-center text-xl gap-8">
+        <NavbarContent className="hidden sm:flex justify-center text-xl gap-8">
           <NavbarItem>
             <Link color="foreground" href="#">
               Home
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href="#" aria-current="page" >
-            Resume
-              
+            <Link href="#skill" aria-current="page">
+              Skill
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Link color="foreground" href="#about">
-            About me
+              About me
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#project" >
+            <Link color="foreground" href="#project">
               Project
             </Link>
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent className="w-1/3 text-xl gap-6">
-          <NavbarItem>
-          <Button href="#" className="text-white bg-gradient-to-r from-purple-700 to-orange-700 p-3 rounded-3xl shadow-lg hover:from-purple-600 hover:to-orange-600">
-              Connect with me
-          </Button>
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
-    </div>
+      </div>
+    </Navbar>
   );
-}
+};
 
 export default CustomNavbar;
