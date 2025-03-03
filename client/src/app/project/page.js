@@ -2,7 +2,7 @@
 import { Divider } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
-export default function GitHubProjects() {
+export default function Project() {
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
