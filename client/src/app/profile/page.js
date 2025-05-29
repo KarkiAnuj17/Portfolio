@@ -6,7 +6,7 @@ const Profile = () => {
   return (
     <div className="p-8  flex flex-col justify-center items-center text-cente">
     <Image
-      src="/photo.jpg"
+      src="/photo.jpeg"
       width={150}
       height={150}
       alt="Profile Picture"

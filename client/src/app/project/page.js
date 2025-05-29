@@ -12,7 +12,7 @@ const Index = () => {
     const fetchRepos = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("https://api.github.com/users/Karkianuj17/repos");
+      const response = await fetch("/api/repos");
 
         if (!response.ok) {
           throw new Error("Failed to fetch repositories");
