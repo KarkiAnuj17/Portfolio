@@ -21,13 +21,12 @@ const About = () => {
               code.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or
-              sharing knowledge with the developer community. I believe in continuous learning and staying updated with
-              the latest industry trends.
+              I dedicate time to mastering emerging technologies through building experimental projects. 
+              This hands-on learning approach keeps my skills sharp and allows me to bring fresh perspectives to production work.
             </p>
             <div className="grid grid-cols-2 gap-6 pt-6">
               <div className="text-center p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
-                <div className="text-3xl font-bold text-purple-400">10+</div>
+                <div className="text-3xl font-bold text-purple-400">5+</div>
                 <div className="text-gray-400">Projects Completed</div>
               </div>
               <div className="text-center p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
