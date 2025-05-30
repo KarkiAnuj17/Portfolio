@@ -1,64 +1,77 @@
-import { Divider } from '@nextui-org/react'
-import React from 'react'
-import { LiaHtml5 } from "react-icons/lia";
-import { TbBrandCss3 } from "react-icons/tb";
-import { LiaJsSquare } from "react-icons/lia";
-import { RiTailwindCssLine } from "react-icons/ri";
-import { FaReact } from "react-icons/fa6";
-import { FaNodeJs } from "react-icons/fa";
-import { SiExpress } from "react-icons/si";
-import { DiMongodb } from "react-icons/di";
-import { GrGithub } from "react-icons/gr";
+import { Code, Database, Globe, Server } from "lucide-react"
 
-const Skill = () => {
+export default function Skills() {
+  const skillCategories = [
+    {
+      title: "Frontend",
+      icon: <Globe className="w-8 h-8" />,
+      skills: ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "Tailwind CSS"],
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: "Backend",
+      icon: <Server className="w-8 h-8" />,
+      skills: ["Node.js", "Express.js", "REST APIs", "Authentication"],
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      title: "Database",
+      icon: <Database className="w-8 h-8" />,
+      skills: ["MongoDB", "Mongoose", "Database Design"],
+      color: "from-purple-500 to-violet-500",
+    },
+    {
+      title: "Tools & Others",
+      icon: <Code className="w-8 h-8" />,
+      skills: ["Git", "GitHub", "VS Code", "Postman", "npm", "Responsive Design"],
+      color: "from-orange-500 to-red-500",
+    },
+  ]
+
   return (
-    <div id="skill">
-    <div className="py-7 m-5 text-center flex flex-col items-center">
-    <h2 className="text-4xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-orange-500">
-          Skills
-        </h2>
-        <Divider className="w-24 h-1 mb-12 mx-auto rounded-lg bg-gradient-to-r from-purple-600 to-orange-600" />
-    <div className="flex text-align gap-5">
-      <div>
-    <LiaHtml5 className="text-8xl"/>
-    <p className="text-xl">HTML</p>
-    </div>
-    <div>
-    <TbBrandCss3 className="text-8xl "/>
-    <p className="text-xl ">CSS</p>
-    </div>
-    <div>
-    <LiaJsSquare className="text-8xl "/>
-    <p className="text-xl ">JavaScript</p>
-    </div>
-    <div>
-    <FaReact className="text-8xl "/>
-    <p className="text-xl ">React JS</p>
-    </div>
-    <div>
-    <RiTailwindCssLine className="text-8xl "/>
-    <p className="text-xl ">Tailwind CSS</p>
-    </div>
-    <div>
-    <FaNodeJs className="text-8xl "/>
-    <p className="text-xl ">Node JS</p>
-    </div>
-    <div>
-    <SiExpress className="text-8xl "/>
-    <p className="text-xl ">Express JS</p>
-    </div>
-    <div>
-    <DiMongodb className="text-8xl "/>
-    <p className="text-xl ">Mongo DB</p>
-    </div>
-    <div>
-    <GrGithub className="text-8xl "/>
-    <p className="text-xl ">Github</p>
-    </div>
-    </div>
-    </div>
-    </div>
+    <section id="skills" className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Skills & Technologies
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            Here are the technologies and tools I work with to bring ideas to life
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {skillCategories.map((category, index) => (
+            <div
+              key={category.title}
+              className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
+            >
+              <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${category.color} mb-4`}>
+                {category.icon}
+              </div>
+
+              <h3 className="text-xl font-bold text-white mb-4">{category.title}</h3>
+
+              <div className="space-y-2">
+                {category.skills.map((skill, skillIndex) => (
+                  <div
+                    key={skill}
+                    className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+                  >
+                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.color}`}></div>
+                    <span className="text-sm">{skill}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
-
-export default Skill

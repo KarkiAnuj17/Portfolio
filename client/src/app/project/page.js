@@ -1,19 +1,17 @@
 'use client'
 import { useEffect, useState } from "react";
-import { ArrowUp, Github, Link } from "lucide-react";
+import { GitFork, Github, Star } from "lucide-react";
 
 const Index = () => {
   const [repos, setRepos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
     const fetchRepos = async () => {
       setIsLoading(true);
       try {
-      const response = await fetch("/api/repos");
-
+        const response = await fetch("/api/repos");
         if (!response.ok) {
           throw new Error("Failed to fetch repositories");
         }
@@ -21,17 +19,32 @@ const Index = () => {
         const data = await response.json();
 
         const selectedRepos = data.filter(repo =>
-          ["Advanced-Calculator", "ecommerce-website", "Tic-tac-toe","minesweeper","slot_game","lottery-game","jobListing"].includes(repo.name)
+          [
+            "Advanced-Calculator",
+            "ecommerce-website",
+            "Tic-tac-toe",
+            "minesweeper",
+            "slot_game",
+            "lottery-game",
+            "jobListing"
+          ].includes(repo.name)
         );
 
         const projectDescriptions = {
-          "Advanced-Calculator": "A powerful A responsive React-based calculator built with NextUI, featuring dynamic input handling, custom-styled buttons, and support for basic arithmetic operations including percentage, clear, and backspace functionalities.",
-          "ecommerce-website": "A full-stack web application for online shopping. Features include product listings, user authentication, a shopping cart, order management, and a responsive design. Built using modern web technologies for a seamless user experience.",
-          "Tic-tac-toe": "An interactive Tic Tac Toe game featuring a sleek UI and smart game logic to compete with another player.",
-          "minesweeper":"Developed Mine Hunter, a browser-based game using React, Next.js, and Tailwind CSS with a dynamic 2D grid, real-time interaction, score tracking, timed gameplay, and responsive UI powered by React hooks and Lucide Icons.",
-          "slot_game":"Developed an interactive slot machine game using React and Tailwind CSS with dynamic UI, animations, and responsive icons, featuring core game logic for betting, life system, jackpot, win conditions, and smooth, condition-based gameplay transitions.",
-          "lottery-game":"Developed an interactive slot machine game using React, Next.js, and hooks, featuring real-time win/loss logic, animated feedback, responsive UI with Tailwind CSS, reusable components, and clean code structure following modern React best practices.",
-          "jobListing":"Built a responsive job listing platform using React, Next.js, and Tailwind CSS, featuring pagination, a favorites system, an intuitive job details page, and a validated application form.",
+          "Advanced-Calculator":
+            "A responsive React-based calculator built with NextUI, featuring dynamic input handling and support for arithmetic operations.",
+          "ecommerce-website":
+            "A full-stack eCommerce app with product listings, authentication, and cart features built using modern web tools.",
+          "Tic-tac-toe":
+            "An interactive two-player Tic Tac Toe game with clean UI and smart logic.",
+          "minesweeper":
+            "A browser-based Minesweeper game with React, featuring a responsive grid and real-time interaction.",
+          "slot_game":
+            "A slot machine game with dynamic UI, animations, betting logic, and condition-based gameplay.",
+          "lottery-game":
+            "A lottery game with animated feedback, real-time logic, and reusable components using React.",
+          "jobListing":
+            "A job listing platform with pagination, favorites, and an application form built in Next.js."
         };
 
         const enrichedRepos = await Promise.all(
@@ -60,33 +73,18 @@ const Index = () => {
     fetchRepos();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScroll(window.scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <div id="project" className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 py-16">
+    <section id="projects" className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-orange-500">
-            My GitHub Projects
-          </h1>
-          <div className="h-1 w-24 bg-gradient-to-r from-purple-600 to-orange-500 mx-auto rounded-full mb-8"></div>
-          <p className="text-white text-lg max-w-2xl mx-auto">
-            A showcase of my selected open-source projects from GitHub.
-            Each card displays key project information and links.
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Featured Projects
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            A showcase of my recent work and open-source contributions
           </p>
         </div>
 
@@ -94,80 +92,61 @@ const Index = () => {
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500"></div>
           </div>
-        ) : error ? (
-          <div className="text-center p-8 bg-red-50 rounded-lg border border-red-200">
-            <p className="text-red-600 font-medium text-lg">{error}</p>
-            <p className="text-gray-600 mt-2">Please try again later or check your network connection.</p>
-          </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {repos.map((repo) => (
               <div
                 key={repo.id}
-                className="bg-black rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100"
+                className="relative group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
               >
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-3">
-                    {repo.name.replace(/-/g, " ")}
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-200">
+                    {repo.name}
                   </h3>
-
-                  <p className="text-white mb-4  h-30">
-                    {repo.customDescription || "A personal project showcasing my coding skills and interests."}
-                  </p>
-
-                  <div className="flex items-center text-sm text-white mb-4">
-                    <span className="flex items-center mr-4">
-                      <span className="mr-1">⭐</span>
-                      {repo.stargazers_count || 0} stars
-                    </span>
-                    <span className="flex items-center">
-                      <span className="mr-1">🍴</span>
-                      {repo.forks_count || 0} forks
-                    </span>
-                  </div>
-
-                  {repo.languages?.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {repo.languages.map((lang) => (
-                        <span
-                          key={lang}
-                          className="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium"
-                        >
-                          {lang}
-                        </span>
-                      ))}
+                  <div className="flex space-x-2">
+                    <div className="flex items-center text-gray-400 text-sm">
+                      <Star size={14} className="mr-1" />
+                      {repo.stargazers_count}
                     </div>
-                  )}
-
-                  <div className="flex mt-4 pt-4 border-t border-gray-100 gap-3">
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
-                      aria-label={`GitHub repository for ${repo.name}`}
-                    >
-                      <Github size={16} className="mr-2" />
-                      GitHub Repo
-                    </a>
+                    <div className="flex items-center text-gray-400 text-sm">
+                      <GitFork size={14} className="mr-1" />
+                      {repo.forks_count}
+                    </div>
                   </div>
                 </div>
+
+                <p className="text-gray-300 text-sm mb-4">{repo.customDescription}</p>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {repo.languages.map((lang) => (
+                    <span
+                      key={lang}
+                      className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 rounded-full text-xs font-medium border border-purple-500/30"
+                    >
+                      {lang}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex space-x-3 z-10 relative">
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-sm font-medium"
+                  >
+                    <Github size={16} className="mr-2" />
+                    Code
+                  </a>
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             ))}
           </div>
         )}
-
-        {showScroll && (
-          <button
-            onClick={scrollToTop}
-            aria-label="Scroll to top"
-            className="fixed bottom-6 right-6 p-3 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 transition-colors"
-          >
-            <ArrowUp size={20} />
-          </button>
-        )}
       </div>
-    </div>
+    </section>
   );
 };
 
