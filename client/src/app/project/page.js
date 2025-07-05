@@ -11,7 +11,12 @@ const Index = () => {
     const fetchRepos = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("/api/repos");
+        const response = await fetch("https://api.github.com/users/Karkianuj17/repos", {
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+          },
+        });
+
         if (!response.ok) {
           throw new Error("Failed to fetch repositories");
         }
@@ -49,15 +54,23 @@ const Index = () => {
 
         const enrichedRepos = await Promise.all(
           selectedRepos.map(async (repo) => {
-            const langResponse = await fetch(repo.languages_url);
-            const langData = await langResponse.json();
-            const languages = Object.keys(langData);
+            try {
+              const langResponse = await fetch(repo.languages_url);
+              const langData = await langResponse.json();
+              const languages = Object.keys(langData);
 
-            return {
-              ...repo,
-              customDescription: projectDescriptions[repo.name] || repo.description,
-              languages,
-            };
+              return {
+                ...repo,
+                customDescription: projectDescriptions[repo.name] || repo.description,
+                languages,
+              };
+            } catch (langError) {
+              return {
+                ...repo,
+                customDescription: projectDescriptions[repo.name] || repo.description,
+                languages: [],
+              };
+            }
           })
         );
 
@@ -73,8 +86,19 @@ const Index = () => {
     fetchRepos();
   }, []);
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4 text-red-400">Error Loading Repositories</h1>
+          <p className="text-gray-300">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-20 px-4 min-h-screen  border-white/10">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

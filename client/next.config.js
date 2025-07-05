@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    srcDir: 'src',
-  experimental: {
-    eslint:{
-      ignoreDuringBuilds:true,
-    }
-
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
